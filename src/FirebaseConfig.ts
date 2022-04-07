@@ -1,4 +1,7 @@
-import firebase from "firebase/app";
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import "firebase/firestore";
+import "firebase/storage";
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -10,8 +13,11 @@ const config = {
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
-if (!firebase.getApps.length) {
-  firebase.initializeApp(config);
-}
+const firebaseApp = initializeApp(config);
+const auth = getAuth(firebaseApp);
 
-export default firebase;
+const firebaseConfig = {
+  auth,
+};
+
+export default firebaseConfig;
